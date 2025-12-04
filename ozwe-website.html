@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OZWE.id</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        :root {
+            --primary-green: #1a5c3a;
+            --light-green: #d4e5cd;
+            --accent-yellow: #f5c842;
+            --white: #ffffff;
+            --dark-text: #2d2d2d;
+            --light-bg: #f8f9fa;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-yellow);
+            border-radius: 50%;
+            border: 3px solid var(--primary-green);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .cart-btn {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 92, 58, 0.3);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-yellow);
+            color: var(--primary-green);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--light-green) 0%, #e8f5e3 100%);
+            padding: 120px 5% 80px;
+            margin-top: 70px;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            color: var(--accent-yellow);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--dark-text);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-btn {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(26, 92, 58, 0.3);
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 5%;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        /* Products Section */
+        .products {
+            background: var(--light-bg);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            color: var(--primary-green);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .product-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-tag {
+            background: var(--light-green);
+            color: var(--primary-green);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #145031;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: var(--primary-green);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .mission-vision {
+            background: var(--light-green);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .mission-vision h4 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .mission-vision ul {
+            margin-left: 1.5rem;
+            line-height: 2;
+        }
+
+        /* Team Section */
+        .team {
+            background: var(--light-bg);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-yellow));
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+            font-weight: bold;
+        }
+
+        .team-name {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-role {
+            color: var(--accent-yellow);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .team-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Impact Section */
+        .impact {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+
+        .impact .section-title {
+            color: var(--white);
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .impact-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .impact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .impact-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--light-bg);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--primary-green);
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--light-green);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #145031;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 2rem 5%;
+            text-align: center;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-cart {
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--primary-green);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-green);
+        }
+
+        .cart-total {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-top: 1rem;
+            text-align: right;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-green);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-container,
+            .about-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .product-grid,
+            .team-grid,
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                OZWE
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#products">Produk</a></li>
+                <li><a href="#about">Tentang Kami</a></li>
+                <li><a href="#team">Tim</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+                <a href="keranjang.html" class="cart-btn">
+                    🛒 Keranjang
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            <div class="mobile-menu-btn">☰</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-tagline">Only Zest With Energy</div>
+                <h1>Segar, Berenergi, Sehat</h1>
+                <p class="hero-description">
+                    OZWE hadir sebagai inovasi minuman infused drink alami yang segar, sehat, dan praktis. Dibuat dari bahan alami pilihan tanpa tambahan gula berlebih, OZWE mendukung gaya hidup sehat generasi muda yang aktif dan peduli kesehatan.
+                </p>
+                <button class="hero-btn" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">
+                    Lihat Produk Kami
+                </button>
+            </div>
+            <div class="hero-image">
+                <img src="logo perusahaan.jpg" alt="OZWE Infused Drink">
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-container">
+            <h2 class="section-title">🍋 Produk Kami</h2>
+            <p class="section-subtitle">Pilih varian kesukaan Anda untuk hidup lebih sehat dan berenergi</p>
+            
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <img src="Lemon Mint Fresh.jpg" class="product-image" alt="Lemon Mint Fresh">
+                    <div class="product-info">
+                        <h3 class="product-name">Lemon Mint Fresh</h3>
+                        <p class="product-description">Segar, menyejukkan, cocok untuk aktivitas padat</p>
+                        <div class="product-features">
+                            <span class="feature-tag">🍋 100% Alami</span>
+                            <span class="feature-tag">🌿 Rendah Gula</span>
+                            <span class="feature-tag">❄️ Menyegarkan</span>
+                        </div>
+                        <div class="product-price">Rp 25.000</div>
+                        <button class="add-to-cart-btn"
+                        onclick="addToCart('Lemon Mint Fresh', 25000, 'Lemon Mint Fresh.jpg', 'Segar, menyejukkan, cocok untuk aktivitas padat')">
+                        Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <img src="Ginger Lime Boost.jpg" class="product-image" alt="Ginger Lime Boost">
+                    <div class="product-info">
+                        <h3 class="product-name">Ginger Lime Boost</h3>
+                        <p class="product-description">Hangat, sehat, meningkatkan daya tahan tubuh</p>
+                        <div class="product-features">
+                            <span class="feature-tag">🌶️ Meningkatkan Imun</span>
+                            <span class="feature-tag">🍃 Tanpa Pengawet</span>
+                            <span class="feature-tag">💪 Berenergi</span>
+                        </div>
+                        <div class="product-price">Rp 28.000</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Ginger Lime Boost', 28000)">
+                            Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <img src="Cinnamon Orange Glow.jpg" class="product-image" alt="Cinnamon Orange Glow">
+                    <div class="product-info">
+                        <h3 class="product-name">Cinnamon Orange Glow</h3>
+                        <p class="product-description">Unik, kaya rasa, membantu metabolisme</p>
+                        <div class="product-features">
+                            <span class="feature-tag">🍊 Kaya Vitamin C</span>
+                            <span class="feature-tag">🔥 Boosts Metabolism</span>
+                            <span class="feature-tag">✨ Antioksidan</span>
+                        </div>
+                        <div class="product-price">Rp 27.000</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('Cinnamon Orange Glow', 27000)">
+                            Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <h2 class="section-title">🏢 Tentang Kami</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Siapa Kami?</h3>
+                    <p>
+                        OZWE adalah startup minuman sehat yang lahir dari semangat mahasiswa bisnis digital di Medan. Kami percaya bahwa kesehatan adalah investasi terbaik, dan pilihan minuman yang tepat berperan besar dalam menjaga energi sepanjang hari.
+                    </p>
+                    <h3>Makna Nama</h3>
+                    <p>
+                        <strong>OZWE = Only Zest With Energy</strong><br>
+                        Filosofi: Memberikan kesegaran alami (zest), energi positif, dan gaya hidup sehat yang bisa dinikmati semua kalangan.
+                    </p>
+                    <h3>Masalah yang Kami Pecahkan</h3>
+                    <p>
+                        Kebanyakan minuman di pasaran mengandung gula tinggi, pemanis buatan, dan pengawet. Hal ini meningkatkan risiko obesitas, diabetes, serta masalah kesehatan lain. Di sisi lain, pilihan minuman sehat yang praktis masih sangat terbatas. OZWE hadir untuk menjawab kesenjangan ini.
+                    </p>
+                </div>
+                <div class="mission-vision">
+                    <h4>🎯 Visi</h4>
+                    <p>Menjadi brand minuman sehat terpercaya di Indonesia yang menghadirkan kesegaran alami, praktis, dan terjangkau.</p>
+                    
+                    <h4>🚀 Misi</h4>
+                    <ul>
+                        <li>Menyediakan minuman infused drink berbahan alami dengan kualitas terbaik</li>
+                        <li>Mendukung gaya hidup sehat dengan produk rendah gula dan tanpa pengawet</li>
+                        <li>Memberdayakan produsen lokal melalui kemitraan bahan baku alami</li>
+                        <li>Mengedukasi masyarakat tentang pentingnya kesehatan melalui pola minum yang tepat</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <div class="section-container">
+            <h2 class="section-title">👥 Tim Kami</h2>
+            <p class="section-subtitle">Kenali orang-orang hebat di balik OZWE</p>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">E</div>
+                    <h3 class="team-name">Elshaday</h3>
+                    <div class="team-role">CEO & Marketing Strategist</div>
+                    <p class="team-description">
+                        Menentukan visi, misi, dan arah strategis perusahaan. Membangun brand awareness OZWE melalui media sosial, kampanye, dan event.
+                    </p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">O</div>
+                    <h3 class="team-name">Olivviz</h3>
+                    <div class="team-role">COO & Operational Manager</div>
+                    <p class="team-description">
+                        Mengelola operasional harian produksi infused drink. Menjamin proses produksi sesuai standar kualitas tertinggi.
+                    </p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">W</div>
+                    <h3 class="team-name">Windy</h3>
+                    <div class="team-role">CTO & Product Innovation</div>
+                    <p class="team-description">
+                        Mengembangkan formula produk infused drink yang sehat dan inovatif. Melakukan riset tren pasar minuman sehat.
+                    </p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">A</div>
+                    <h3 class="team-name">Azizah</h3>
+                    <div class="team-role">CFO & Finance Planner</div>
+                    <p class="team-description">
+                        Mengatur dan mengawasi arus kas perusahaan. Memastikan keberlanjutan finansial perusahaan dalam jangka panjang.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact">
+        <div class="section-container">
+            <h2 class="section-title">📊 Dampak Sosial</h2>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-icon">💚</div>
+                    <h3>Gaya Hidup Sehat</h3>
+                    <p>Membantu masyarakat beralih ke gaya hidup sehat</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🍬</div>
+                    <h3>Kurangi Gula</h3>
+                    <p>Mengurangi konsumsi gula berlebih yang memicu penyakit metabolik</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🌾</div>
+                    <h3>Dukung Lokal</h3>
+                    <p>Mendukung produsen lokal dengan penggunaan bahan baku asli Indonesia</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">📚</div>
+                    <h3>Edukasi</h3>
+                    <p>Memberikan edukasi tentang pentingnya pola hidup sehat</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-container">
+            <h2 class="section-title">📞 Kontak Kami</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">🌐</div>
+                        <div>
+                            <strong>Website</strong><br>
+                            www.ozwe.id
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📩</div>
+                        <div>
+                            <strong>Email</strong><br>
+                            OZWENITY@gmail.com
+                        </div>
+                    <div class="contact-item">
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="script.js"></script>
+</body>
+
+                    
+    

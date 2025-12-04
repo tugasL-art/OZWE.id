@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OZWE.id</title>
+  <style>
+    :root {
+      --primary-green: #1a5c3a;
+      --light-green: #d4e5cd;
+      --accent-yellow: #f5c842;
+      --white: #ffffff;
+      --danger-red: #e63946;
+      --gray: #555;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f8f9fa;
+      color: var(--gray);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem 5%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary-green);
+      font-weight: bold;
+      font-size: 1.8rem;
+    }
+
+    .logo-icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: var(--accent-yellow);
+      border: 3px solid var(--primary-green);
+    }
+
+    nav a {
+      color: var(--primary-green);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--accent-yellow);
+    }
+
+    /* Layout */
+    .container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      padding: 2rem 5%;
+    }
+
+    .cart-items {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      border-bottom: 1px solid #eee;
+      padding: 1rem 0;
+    }
+
+    .cart-item img {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .cart-details {
+      flex: 1;
+    }
+
+    .cart-name {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--primary-green);
+    }
+
+    .cart-desc {
+      font-size: 0.9rem;
+      color: #777;
+      margin: 0.3rem 0;
+    }
+
+    .cart-price {
+      color: var(--primary-green);
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .qty-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      background: var(--primary-green);
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .qty-btn:hover {
+      background: #145031;
+    }
+
+    .qty-value {
+      width: 30px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .delete-btn {
+      background: var(--danger-red);
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .delete-btn:hover {
+      opacity: 0.8;
+    }
+
+    /* Sidebar */
+    .cart-summary {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 100px;
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .summary-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-green);
+      margin-bottom: 1rem;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1rem;
+    }
+
+    .summary-line.total {
+      font-size: 1.3rem;
+      font-weight: bold;
+      border-top: 1px solid #ddd;
+      padding-top: 0.5rem;
+      color: var(--primary-green);
+    }
+
+    .checkout-btn {
+      background: var(--primary-green);
+      color: var(--white);
+      padding: 1rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+
+    .checkout-btn:hover {
+      background: #145031;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 2rem;
+      color: #666;
+    }
+
+    .empty-cart button {
+      background: var(--primary-green);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .cart-summary {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+        <div class="logo-icon"></div>
+        OZWE
+        </div>
+        <nav>
+        <a href="beranda-tentang.html">Beranda</a>
+        <a href="produk.html">Produk</a>
+        <a href="tim.html">Tim</a>
+        <a href="kontak.html">Kontak</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Daftar Barang -->
+        <div class="cart-items" id="cartItems"></div>
+
+        <!-- Ringkasan Pesanan -->
+        <div class="cart-summary">
+        <div class="summary-title">Ringkasan Pesanan</div>
+            <div class="summary-line">
+                <span>Subtotal</span><span id="subtotal">Rp 0</span>
+            </div>
+            <div class="summary-line">
+                <span>Ongkir</span><span>Gratis</span>
+            </div>
+            <div class="summary-line total">
+                <span>Total</span><span id="total">Rp 0</span>
+            </div>
+            <a href="#" class="checkout-btn" id="checkoutBtn">💬 Pesan via WhatsApp</a>
+        </div>
+    </main>
+
+    <script>
+        const cartData = JSON.parse(localStorage.getItem("ozwe_cart")) || [];
+
+        const cartContainer = document.getElementById("cartItems");
+        const subtotalElement = document.getElementById("subtotal");
+        const totalElement = document.getElementById("total");
+        const checkoutBtn = document.getElementById("checkoutBtn");
+
+        function renderCart() {
+        cartContainer.innerHTML = "";
+
+        if (cartData.length === 0) {
+            cartContainer.innerHTML = `
+            <div class="empty-cart">
+                <p>Keranjang kamu masih kosong 😢</p>
+                <button onclick="window.location.href='produk.html'">Belanja Sekarang</button>
+            </div>`;
+            subtotalElement.textContent = "Rp 0";
+            totalElement.textContent = "Rp 0";
+            return;
+        }
+
+        let subtotal = 0;
+
+        cartData.forEach((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            subtotal += itemTotal;
+
+            const productCard = document.createElement("div");
+            productCard.classList.add("cart-item");
+            productCard.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-details">
+                <div class="cart-name">${item.name}</div>
+                <div class="cart-desc">${item.desc || ""}</div>
+                <div class="cart-price">Rp ${item.price.toLocaleString()}</div>
+                <div class="quantity-control">
+                <button class="qty-btn" onclick="changeQty(${index}, -1)">-</button>
+                <div class="qty-value">${item.quantity}</div>
+                <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                </div>
+            </div>
+            <div>
+                <div>Rp ${(itemTotal).toLocaleString()}</div>
+                <button class="delete-btn" onclick="deleteItem(${index})">🗑️</button>
+            </div>
+            `;
+            cartContainer.appendChild(productCard);
+        });
+
+        subtotalElement.textContent = "Rp " + subtotal.toLocaleString();
+        totalElement.textContent = "Rp " + subtotal.toLocaleString();
+        }
+
+        function changeQty(index, amount) {
+        if (cartData[index].quantity + amount <= 0) return;
+        cartData[index].quantity += amount;
+        saveCart();
+        renderCart();
+        }
+
+        function deleteItem(index) {
+        if (confirm("Hapus produk ini dari keranjang?")) {
+            cartData.splice(index, 1);
+            saveCart();
+            renderCart();
+        }
+        }
+
+        function saveCart() {
+        localStorage.setItem("ozwe_cart", JSON.stringify(cartData));
+        }
+
+        checkoutBtn.addEventListener("click", () => {
+        if (cartData.length === 0) {
+            alert("Keranjang masih kosong!");
+            return;
+        }
+
+        let pesan = "*PESANAN OZWE INFUSED DRINK*\n\n";
+        let total = 0;
+        cartData.forEach((item, i) => {
+            const sub = item.price * item.quantity;
+            total += sub;
+            pesan += `${i + 1}. ${item.name}\n   Jumlah: ${item.quantity} x Rp ${item.price.toLocaleString()}\n   Subtotal: Rp ${sub.toLocaleString()}\n\n`;
+        });
+        pesan += "━━━━━━━━━━━━━━━━━━━━━━━\n";
+        pesan += `*TOTAL: Rp ${total.toLocaleString()}*\n\n`;
+        pesan += "Terima kasih telah memilih OZWE! 🌿";
+
+        const encoded = encodeURIComponent(pesan);
+        const whatsappNumber = "6281234567890"; // 👉 ganti nomor WA di sini
+        const url = `https://wa.me/${whatsappNumber}?text=${encoded}`;
+        window.open(url, "_blank");
+        });
+
+        renderCart();
+    </script>
+    <script src="script.js"></script>
+
+</body>
+</html>
